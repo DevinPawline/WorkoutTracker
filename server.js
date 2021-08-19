@@ -8,4 +8,11 @@ const PORT = process.env.PORT || 8080;
 app.use(morgan("dev"));
 
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.static('public'));
 
+var MONGOD_URI = process.env.MONGOD_URI || "mongod://localhost/workout";
+mongoose.connect(MONGOD_URI, {
+    useNewUrlParser:true,
+    useFindAndModify:false
+})
